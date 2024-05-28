@@ -8,3 +8,8 @@ type IFlashCard interface {
 	Restart()
 	Exit()
 }
+
+type FlashCard struct {
+	Question string
+	Answer   string
+}
