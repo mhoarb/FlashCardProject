@@ -1,7 +1,11 @@
 package main
 
-import "log/slog"
+import (
+	"flashCardProject/internal"
+)
 
 func main() {
-	slog.Info("hello to my project")
+	internal.NewFlashCard("what is your name", "mmd")
+	internal.NewFlashCard("why is not be a human", "because the its hot")
+	internal.DisplayTable()
 }
