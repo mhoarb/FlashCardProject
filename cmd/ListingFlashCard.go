@@ -1,27 +1,31 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
-	"fmt"
-
+	db2 "flashCardProject/db"
+	"flashCardProject/internal"
 	"github.com/spf13/cobra"
+	"log"
 )
 
 // ListingFlashCardCmd represents the ListingFlashCard command
 var ListingFlashCardCmd = &cobra.Command{
 	Use:   "ListingFlashCard",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "list all Flashcards",
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("ListingFlashCard called")
+		db, err := db2.SetUpDatabase()
+		if err != nil {
+			panic(err)
+		}
+		var flashCards []internal.FlashCard
+		flashCards, err = internal.GetAllFlashcardsData(db)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		internal.DisplayTable(flashCards)
 	},
 }
 
