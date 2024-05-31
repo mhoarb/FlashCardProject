@@ -13,7 +13,6 @@ func Play() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-
 	displayTable.ShowFlashCardsTable(flashCards)
-
+	ChooseQuestion()
 }

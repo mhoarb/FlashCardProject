@@ -20,7 +20,7 @@ var NewFlashCardCmd = &cobra.Command{
 		reader := bufio.NewReader(os.Stdin)
 		fmt.Println("please enter your question:")
 		question, _ := reader.ReadString('\n')
-		question = question[:len(question)-1] // حذف کاراکتر newline
+		question = question[:len(question)-1]
 
 		fmt.Println("please enter your answer :")
 		answer, _ := reader.ReadString('\n')
