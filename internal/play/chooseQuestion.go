@@ -4,31 +4,34 @@ import (
 	"bufio"
 	db2 "flashCardProject/db"
 	"flashCardProject/internal"
-	"github.com/gin-gonic/gin"
 	"log/slog"
-	"net/http"
 	"os"
 )
+
+type RequestQuestionID struct {
+	ID int
+}
 
 func ChooseQuestion() {
 	db, err := db2.SetUpDatabase()
 	if err != nil {
 		panic(err)
 	}
-	slog.Info("please write the question you want to train")
-	reader := bufio.NewReader(os.Stdin)
-	question, _ := reader.ReadString('\n')
-	question = question[:len(question)-1]
 
+	slog.Info("please Choose the index of your question you want ?")
+	reader := bufio.NewReader(os.Stdin)
+	questionID, _ := reader.ReadString('\n')
+	questionID = questionID[:len(questionID)-1]
+
+	var flashCard *internal.FlashCard
+	if err := db.First(&flashCard, questionID).Error; err != nil {
+		slog.Error("Failed to retrieve question:", err)
+	}
 	slog.Info("please write the Answer of this question")
 	answer, _ := reader.ReadString('\n')
 	answer = answer[:len(answer)-1]
 
-	r := gin.Default()
-	r.GET("/question", func(c *gin.Context) {
-		var questions []internal.FlashCard
-		db.Find(&questions)
-		c.JSON(http.StatusOK, questions)
-	})
-
+	if answer == flashCard.Answer {
+		slog.Info("ok")
+	}
 }
