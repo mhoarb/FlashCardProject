@@ -4,6 +4,7 @@ import (
 	"bufio"
 	db2 "flashCardProject/db"
 	"flashCardProject/internal"
+	"log"
 	"log/slog"
 	"os"
 )
@@ -32,6 +33,15 @@ func ChooseQuestion() {
 	answer = answer[:len(answer)-1]
 
 	if answer == flashCard.Answer {
-		slog.Info("ok")
+		flashCard.Status = "correct"
+		if err := db.Save(&flashCard).Error; err != nil {
+			log.Fatalf("Error updating question: %v", err)
+		}
+	} else {
+		flashCard.Status = "Not correct"
+		slog.Info("your answer isn''t correct, please try again`")
+		if err := db.Save(&flashCard).Error; err != nil {
+			log.Fatalf("Error updating question: %v", err)
+		}
 	}
 }
