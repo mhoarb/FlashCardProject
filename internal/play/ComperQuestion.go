@@ -1,5 +1,0 @@
-package play
-
-func CompereQuestion() {
-
-}

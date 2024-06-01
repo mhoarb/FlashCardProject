@@ -34,6 +34,7 @@ func ChooseQuestion() {
 
 	if answer == flashCard.Answer {
 		flashCard.Status = "correct"
+		slog.Info("your answer is correct")
 		if err := db.Save(&flashCard).Error; err != nil {
 			log.Fatalf("Error updating question: %v", err)
 		}
@@ -43,5 +44,6 @@ func ChooseQuestion() {
 		if err := db.Save(&flashCard).Error; err != nil {
 			log.Fatalf("Error updating question: %v", err)
 		}
+		Play()
 	}
 }
