@@ -9,10 +9,6 @@ import (
 	"os"
 )
 
-type RequestQuestionID struct {
-	ID int
-}
-
 func ChooseQuestion() {
 	db, err := db2.SetUpDatabase()
 	if err != nil {
