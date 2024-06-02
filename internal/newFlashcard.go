@@ -7,6 +7,8 @@ import (
 	"log/slog"
 )
 
+var FlashCardCount = 0
+
 func NewFlashCard(question, answer string) *gorm.DB {
 	db, err := database.SetUpDatabase()
 	err = db.AutoMigrate(&FlashCard{})
@@ -16,6 +18,7 @@ func NewFlashCard(question, answer string) *gorm.DB {
 
 	flashCard := &FlashCard{Question: question, Answer: answer}
 
+	FlashCardCount++
 	result := db.Create(flashCard)
 	if result.Error != nil {
 		log.Fatalf("failed to create flashCard: %v", result.Error)
