@@ -8,10 +8,11 @@ import (
 	"log"
 	"log/slog"
 	"os"
+	"strconv"
 )
 
 var AllQuestion int64
-var flashCard *internal.FlashCard
+
 var CorrectAnswer int64
 var NotCorrectAnswer int64
 
@@ -20,12 +21,19 @@ func ChooseQuestion() {
 	if err != nil {
 		panic(err)
 	}
-
 	slog.Info("please Choose the index of your question you want ?")
 	reader := bufio.NewReader(os.Stdin)
-	questionID, _ := reader.ReadString('\n')
-	questionID = questionID[:len(questionID)-1]
-
+	questionIDStr, err := reader.ReadString('\n')
+	if err != nil {
+		slog.Error("Failed to read input:", err)
+	}
+	questionIDStr = questionIDStr[:len(questionIDStr)-1]
+	questionID, err := strconv.Atoi(questionIDStr) // Convert to int
+	if err != nil {
+		slog.Error("Invalid question ID format:", err)
+		return
+	}
+	var flashCard internal.FlashCard
 	if err := db.First(&flashCard, questionID).Error; err != nil {
 		slog.Error("Failed to retrieve question:", err)
 	}
@@ -64,7 +72,7 @@ func GameStatistics() {
 	if err != nil {
 		panic(err)
 	}
-
+	var flashCard *internal.FlashCard
 	if err := db.Model(&flashCard).Count(&AllQuestion).Error; err != nil {
 		return
 	}
