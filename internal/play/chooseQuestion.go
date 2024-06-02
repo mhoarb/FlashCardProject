@@ -4,17 +4,11 @@ import (
 	"bufio"
 	db2 "flashCardProject/db"
 	"flashCardProject/internal"
-	"fmt"
 	"log"
 	"log/slog"
 	"os"
 	"strconv"
 )
-
-var AllQuestion int64
-
-var CorrectAnswer int64
-var NotCorrectAnswer int64
 
 func ChooseQuestion() {
 	db, err := db2.SetUpDatabase()
@@ -65,28 +59,5 @@ func ChooseQuestion() {
 			Play()
 		}
 	}
-
-}
-func GameStatistics() {
-	db, err := db2.SetUpDatabase()
-	if err != nil {
-		panic(err)
-	}
-	var flashCard *internal.FlashCard
-	if err := db.Model(&flashCard).Count(&AllQuestion).Error; err != nil {
-		return
-	}
-	fmt.Println("The total number of questions is equal to:", AllQuestion)
-
-	if err := db.Model(&flashCard).Where("status = ?", "correct").Count(&CorrectAnswer).Error; err != nil {
-		fmt.Println("ds")
-	}
-	if err := db.Model(&flashCard).Where("status = ?", "Not correct").Count(&NotCorrectAnswer).Error; err != nil {
-		return
-	}
-	percentageOfQuestionsAnswered := float64(CorrectAnswer+NotCorrectAnswer) / float64(AllQuestion) * 100
-	fmt.Println("The Percentage of questions answered is equal to:", percentageOfQuestionsAnswered, "%")
-	PercentageOfQuestionsWithCorrectAnswers := float64(CorrectAnswer) / float64(AllQuestion) * 100
-	fmt.Println("The Percentage of questions with correct answers is equal to:", PercentageOfQuestionsWithCorrectAnswers, "%")
 
 }

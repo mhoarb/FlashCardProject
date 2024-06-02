@@ -3,7 +3,6 @@ package displayTable
 import (
 	"flashCardProject/internal"
 	"github.com/olekukonko/tablewriter"
-	"log/slog"
 	"os"
 	"strconv"
 )
@@ -22,5 +21,5 @@ func ShowFlashCardsTable(flashCards []internal.FlashCard) {
 	}
 
 	table.Render()
-	slog.Info("%%%%%")
+	Progress()
 }

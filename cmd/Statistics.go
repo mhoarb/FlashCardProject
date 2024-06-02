@@ -4,7 +4,7 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"flashCardProject/internal/play"
+	"flashCardProject/internal/play/displayTable"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +17,7 @@ var StatisticsCmd = &cobra.Command{
 		"2-% of questions that have answers\n" +
 		"3- The percentage of questions that have the correct answer",
 	Run: func(cmd *cobra.Command, args []string) {
-		play.GameStatistics()
+		displayTable.GameStatistics()
 	},
 }
 
