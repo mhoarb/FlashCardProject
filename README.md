@@ -75,10 +75,10 @@ FlashCardProject/
 ├── go.sum
 └── main.go
 ```
- cmd/: Contains command-line interface related files.
- db/: Contains database-related code and tests.
- internal/: Contains internal application logic.
- main.go: Entry point of the application.
+ cmd/: Contains command-line interface related files.\n
+ db/: Contains database-related code and tests.\n
+ internal/: Contains internal application logic.\n
+ main.go: Entry point of the application.\n
 
 
 
