@@ -19,17 +19,17 @@ func ChooseQuestion() {
 	reader := bufio.NewReader(os.Stdin)
 	questionIDStr, err := reader.ReadString('\n')
 	if err != nil {
-		slog.Error("Failed to read input:", err)
+		slog.Error("input error", "Failed to read input:", err)
 	}
 	questionIDStr = questionIDStr[:len(questionIDStr)-1]
 	questionID, err := strconv.Atoi(questionIDStr) // Convert to int
 	if err != nil {
-		slog.Error("Invalid question ID format:", err)
+		slog.Error("invalid Question ID", "Invalid question ID format:", err)
 		return
 	}
 	var flashCard internal.FlashCard
 	if err := db.First(&flashCard, questionID).Error; err != nil {
-		slog.Error("Failed to retrieve question:", err)
+		slog.Error("error", "Failed to retrieve question:", err)
 	}
 
 	if flashCard.Status == "correct" {

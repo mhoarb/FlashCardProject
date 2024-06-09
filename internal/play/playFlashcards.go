@@ -11,6 +11,9 @@ var flashCards []internal.FlashCard
 
 func Play() {
 	db, err := db2.SetUpDatabase()
+	if err != nil {
+		log.Fatalln(err)
+	}
 	flashCards, err = internal.GetAllFlashcardsData(db)
 	if err != nil {
 		log.Fatalln(err)

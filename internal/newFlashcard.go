@@ -11,6 +11,9 @@ var FlashCardCount = 0
 
 func NewFlashCard(question, answer string) *gorm.DB {
 	db, err := database.SetUpDatabase()
+	if err != nil {
+		log.Fatalf("failed to setup database: %v", err)
+	}
 	err = db.AutoMigrate(&FlashCard{})
 	if err != nil {
 		log.Fatalf("failed to migrate database: %v", err)

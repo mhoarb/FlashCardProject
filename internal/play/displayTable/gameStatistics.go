@@ -54,7 +54,8 @@ func Progress() {
 func printProgressBar(percentage float64) {
 	barWidth := 50 // Width of the progress bar
 	pos := int(percentage / 100 * float64(barWidth))
-	fmt.Println("\n\n")
+	fmt.Println()
+	fmt.Println()
 
 	fmt.Print("[")
 	for i := 0; i < barWidth; i++ {
