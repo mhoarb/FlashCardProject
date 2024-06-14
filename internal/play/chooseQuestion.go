@@ -10,6 +10,10 @@ import (
 	"strconv"
 )
 
+// ChooseQuestion allows the user to select a flash card by its ID, answer it, and update its status accordingly.
+// It interacts with the user via stdin for input, retrieves the flash card from the database based on the chosen ID,
+// prompts the user to provide an answer, checks the correctness of the answer, updates the flash card's status,
+// and recursively calls the Play function for further interaction.
 func ChooseQuestion() {
 	db, err := db2.SetUpDatabase()
 	if err != nil {

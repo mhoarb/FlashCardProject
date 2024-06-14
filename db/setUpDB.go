@@ -7,6 +7,8 @@ import (
 	"os"
 )
 
+// LoadEnv loads environment variables from a .env file located in the current directory.
+// It returns an error if the .env file cannot be loaded or parsed successfully.
 func LoadEnv() error {
 	return godotenv.Load()
 }

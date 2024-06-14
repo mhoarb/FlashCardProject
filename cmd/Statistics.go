@@ -2,7 +2,7 @@
 package cmd
 
 import (
-	"flashCardProject/internal/play/displayTable"
+	"flashCardProject/internal/play/displaytable"
 	"github.com/spf13/cobra"
 )
 
@@ -15,7 +15,7 @@ var StatisticsCmd = &cobra.Command{
 		"2-% of questions that have answers\n" +
 		"3- The percentage of questions that have the correct answer",
 	Run: func(cmd *cobra.Command, args []string) {
-		displayTable.GameStatistics()
+		displaytable.GameStatistics()
 	},
 }
 

@@ -7,8 +7,19 @@ import (
 	"log/slog"
 )
 
+// FlashCardCount represents the current count of flash cards.
 var FlashCardCount = 0
 
+// NewFlashCard creates and saves a new flash card with the given question and answer to the database.
+// It initializes a database connection, performs auto migration for FlashCard model,
+// increments the FlashCardCount, and logs operations. Returns the database connection.
+//
+// Parameters:
+//   - question: The question text for the new flash card.
+//   - answer: The answer text for the new flash card.
+//
+// Returns:
+//   - *gorm.DB: Pointer to the GORM DB instance after creating the flash card.
 func NewFlashCard(question, answer string) *gorm.DB {
 	db, err := database.SetUpDatabase()
 	if err != nil {
