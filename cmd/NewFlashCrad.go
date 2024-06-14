@@ -1,6 +1,4 @@
-/*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-*/
+// Package cmd provides the commands for the CLI application.
 package cmd
 
 import (
@@ -11,7 +9,7 @@ import (
 	"os"
 )
 
-// NewFlashCardCmd represents the NewFlashCrad command
+// NewFlashCardCmd represents the NewFlashCard command
 var NewFlashCardCmd = &cobra.Command{
 	Use:   "NewFlashCard",
 	Short: "Creating new flashCard easily",

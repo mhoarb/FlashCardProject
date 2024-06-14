@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// ExitCmd represents the command to exit and finish the program.
 var ExitCmd = &cobra.Command{
 	Use:   "Exit",
 	Short: "Exit And Finish thw program",
