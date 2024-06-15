@@ -25,28 +25,8 @@ var NewFlashCardCmd = &cobra.Command{
 		answer = answer[:len(answer)-1]
 		internal.NewFlashCard(question, answer)
 	},
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// NewFlashCardCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// NewFlashCardCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 func init() {
 	rootCmd.AddCommand(NewFlashCardCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// RESTARTCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// RESTARTCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
