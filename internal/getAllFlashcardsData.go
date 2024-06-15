@@ -13,6 +13,7 @@ import (
 // Returns:
 //   - []FlashCard: A slice of FlashCard structs representing all flash cards in the database.
 //   - error: An error if the database query fails.
+
 func GetAllFlashcardsData(db *gorm.DB) ([]FlashCard, error) {
 	var flashCards []FlashCard
 	result := db.Find(&flashCards)
