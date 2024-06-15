@@ -10,6 +10,7 @@ import (
 )
 
 // NewFlashCardCmd represents the NewFlashCard command
+
 var NewFlashCardCmd = &cobra.Command{
 	Use:   "NewFlashCard",
 	Short: "Creating new flashCard easily",
