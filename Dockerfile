@@ -1,11 +1,6 @@
+#Stage 1
 # Use the official Golang image as the base image
-FROM golang:1.22-alpine
-
-# Install necessary tools including proxychains
-RUN apk --no-cache add proxychains-ng
-
-# Set up proxychains configuration
-RUN echo 'socks5 127.0.0.1 10808' >> /etc/proxychains.conf
+FROM golang:1.22-alpine As builder
 
 # Set environment variables for proxychains
 ENV GOPROXY=https://goproxy.io,direct
@@ -20,14 +15,19 @@ COPY go.mod go.sum ./
 # Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
 RUN go mod download
 
-# Copy the source from the current directory to the Working Directory inside the container
+# Copy the source from the current directorccleay to the Working Directory inside the container
 COPY . .
 
-# Build the Go app
-RUN go build -o main .
+RUN go get
 
-# Expose port 8080 to the outside world
-EXPOSE 8080
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o main .
 
-# Command to run the executable
-CMD ["./main"]
+
+# Stage 2: Create a minimal image
+FROM scratch
+
+# Copy the binary from the builder stage
+COPY --from=builder /app/main /main
+
+# Set the entry point
+ENTRYPOINT ["/main"]
